@@ -1,14 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Coding Quiz</title>
-    <link rel="stylesheet" href="./style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
     <h1>Coding Quiz</h1>
+    <div id="startPage">
+      <h2>Start</h2>
+      <p>
+        This is a quiz dedicated to testing your knowledge of javascript. There
+        will be several multiple choice questions and a timer counting down the
+        time left. Your scores will be presented at the end.
+      </p>
+      <button id="startBtn">Start Quiz</button>
+    </div>
+    <div id="gamePage">
+      <h2>Game</h2>
+      <div id="question container" class="hide">
+        <div id="question">Questions</div>
+        <div id="answer-buttons" class="btn-grid">
+          <button class="btn">Answer 1</button>
+          <button class="btn">Answer 2</button>
+          <button class="btn">Answer 3</button>
+          <button class="btn">Answer 4</button>
+        </div>
+      </div>
+      <div class="controls">
+        <button id="next-btn" class="next-btn btn hide">Next</button>
+      </div>
+    </div>
+    <form id="endPage">
+      <h2>End Screen</h2>
+      <div id="initials">Initials:</div>
+      <input type="text" />
+      <button type="submit">Submit</button>
+    </form>
+
+    <p id="timerDisplay">75</p>
+
     <script src="./script.js"></script>
-</body>
+  </body>
 </html>
