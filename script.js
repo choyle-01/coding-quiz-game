@@ -122,7 +122,7 @@ gameEl.addEventListener("click", function (event) {
 
 // handles local storage and displays the players high scores
 
-function handleInitialSubmit(event) {
+function playerSubmit(event) {
   event.preventDefault();
 
   var stored = JSON.parse(localStorage.getItem("highScores")) || [];
@@ -139,7 +139,7 @@ function showHighScores() {
   var highScores = localStorage.getItem("highScores");
   scoresDisplay.textContent = highScores;
 }
-submitBtn.addEventListener("click", handleInitialSubmit);
+submitBtn.addEventListener("click", playerSubmit);
 
 playAgainBtn.addEventListener("click", init);
 
