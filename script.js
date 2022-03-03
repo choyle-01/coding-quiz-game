@@ -11,6 +11,7 @@ var titleEl = document.querySelector("#title");
 var rightOrWrong = document.querySelector("#correct-incorrect");
 var submitButton = document.querySelector("#select");
 var finalScore = document.querySelector("#score");
+var timer;
 var questions = [
   {
     question: "Which of the following is a javaScript data type?",
@@ -29,6 +30,11 @@ var questions = [
   },
 ];
 
+var personScore = {
+  Name: initialsInput,
+  Score: finalScore,
+};
+
 function renderQuestion() {
   var question = questions[questionIndex];
   var currentQuestion = question.question;
@@ -38,7 +44,6 @@ function renderQuestion() {
   for (var i = 0; i < question.possible.length; i++) {
     var item = question.possible[i];
     var answerBtn = document.createElement("button");
-    // node.dataset.value = key;
     answerBtn.textContent = item;
     questionsEl.appendChild(answerBtn);
     answerBtn.textContent = item;
@@ -72,7 +77,7 @@ function gameScreen() {
 
   renderQuestion();
   timerTime.textContent = seconds;
-  var timer = setInterval(function () {
+  timer = setInterval(function () {
     seconds--;
     timerTime.textContent = seconds;
     if (seconds <= 0) {
@@ -80,7 +85,6 @@ function gameScreen() {
     }
   }, 1000);
 }
-
 
 function endScreen() {
   startEl.style.display = "none";
@@ -104,19 +108,21 @@ gameEl.addEventListener("click", function (event) {
       endScreen();
       clearInterval(timer);
     }
-}
+  }
 });
 
 function handleInitialSubmit(event) {
   event.preventDefault();
 
-  var stored = JSON.parse(localStorage.getItem('highScores')) || [];
+  var stored = JSON.parse(localStorage.getItem("highScores")) || [];
   var updatedScores = stored.concat({
     score: score,
-    initials: initialsInput.value
+    initials: initialsInput.value,
   });
 
-  localStorage.setItem('highScores', JSON.stringify(updatedScores));
+  localStorage.setItem("highScores", JSON.stringify(updatedScores));
 }
+
+localStorage.setItem("personScore", JSON.stringify(personScore));
 
 init();
