@@ -1,9 +1,10 @@
+/* quick reset to get everythign ready for styling */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-
+/* basic styling and organizing to make the page easier to read */
 body {
     background-color: #E0FBFC;
 }

@@ -9,6 +9,7 @@
   </head>
   <body>
     <h1>Coding Quiz</h1>
+    <!-- startPage will display upon loading -->
     <div id="startPage">
       <h2>Start</h2>
       <p>
@@ -18,19 +19,25 @@
       </p>
       <button id="startBtn">Start Quiz</button>
     </div>
+    <!-- gamePage will load after the start button is pressed and the game is started -->
     <div id="gamePage">
       <h2 id="title">Game</h2>
       <div>
         <div id="questions"></div>
       </div>
+      <div id="results">
+        <hr>
+        <span id="correct-incorrect"></span>
+      </div>
     </div>
+    <!-- end page is at the end of the game after the game is finished -->
     <form id="endPage">
       <h2>End Screen</h2>
       <div id="initials">Initials:</div>
       <input type="text" />
       <button type="submit">Submit</button>
     </form>
-
+    <!-- a p tag to display the timer  -->
     <p id="timerDisplay">75</p>
 
     <script src="./script.js"></script>
