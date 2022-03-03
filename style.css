@@ -60,6 +60,6 @@ button {
     
 }
 
-.hide {
-    display: none;
+#questions {
+    text-align: center;
 }
