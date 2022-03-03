@@ -8,22 +8,24 @@ var initialsInput = document.querySelector("#initials");
 var seconds = 75;
 var questionIndex = 0;
 var titleEl = document.querySelector("#title");
-var rightOrWrong = document.querySelector("#correct-incorrect")
+var rightOrWrong = document.querySelector("#correct-incorrect");
+var submitButton = document.querySelector("#select");
+var finalScore = document.querySelector("#score");
 var questions = [
   {
-    question: "Lorem ipsum dolor",
-    possible: ["curly brackets", "parentheses", "block", "example"],
-    correct: "parentheses",
+    question: "Which of the following is a javaScript data type?",
+    possible: ["curly brackets", "parentheses", "block", "number"],
+    correct: "number",
   },
   {
-    question: "Lorem ipsum dolor sit",
-    possible: ["5", "6", "7", "8"],
-    correct: "6",
+    question: "What is the capitalization case in javaScript called?",
+    possible: ["camelCasing", "kangarooCasing", "curlyCasing", "coolioCasing"],
+    correct: "camelCasing",
   },
   {
-    question: "Lorem ipsum dolor sit amet",
-    possible: ["9", "10", "11", "12"],
-    correct: "11",
+    question: "What company created javaScript?",
+    possible: ["Microsoft", "Google", "Bing", "Netscape"],
+    correct: "Netscape",
   },
 ];
 
@@ -40,22 +42,21 @@ function renderQuestion() {
     answerBtn.textContent = item;
     questionsEl.appendChild(answerBtn);
     answerBtn.textContent = item;
-    answerBtn.addEventListener("click", function() {
-        checkAnswer(this.textContent);
-    })
+    answerBtn.addEventListener("click", function () {
+      checkAnswer(this.textContent);
+    });
   }
 }
 
 function checkAnswer(possible) {
-    var correctAnswer = questions[questionIndex].correct
-    if (possible != correctAnswer) {
-        rightOrWrong.textContent = 'Incorrect!';
-        seconds = Math.max(seconds - 15, 0);
-    }
-    else {
-        rightOrWrong.textContent = 'Correct!';
-    }
-    resultDiv.style.display = "block";
+  var correctAnswer = questions[questionIndex].correct;
+  if (possible != correctAnswer) {
+    rightOrWrong.textContent = "Incorrect!";
+    seconds = Math.max(seconds - 12, 0);
+  } else {
+    rightOrWrong.textContent = "Correct!";
+  }
+  resultDiv.style.display = "block";
 }
 
 function startScreen() {
@@ -68,21 +69,24 @@ function gameScreen() {
   startEl.style.display = "none";
   gameEl.style.display = "block";
   endEl.style.display = "none";
+
   renderQuestion();
   timerTime.textContent = seconds;
   var timer = setInterval(function () {
     seconds--;
     timerTime.textContent = seconds;
-    if (seconds < 0) {
+    if (seconds <= 0) {
       clearInterval(timer);
     }
   }, 1000);
 }
 
+
 function endScreen() {
   startEl.style.display = "none";
   gameEl.style.display = "none";
   endEl.style.display = "block";
+  finalScore.textContent = seconds;
 }
 
 function init() {
@@ -98,8 +102,21 @@ gameEl.addEventListener("click", function (event) {
       renderQuestion();
     } else {
       endScreen();
+      clearInterval(timer);
     }
-  }
+}
 });
+
+function handleInitialSubmit(event) {
+  event.preventDefault();
+
+  var stored = JSON.parse(localStorage.getItem('highScores')) || [];
+  var updatedScores = stored.concat({
+    score: score,
+    initials: initialsInput.value
+  });
+
+  localStorage.setItem('highScores', JSON.stringify(updatedScores));
+}
 
 init();
