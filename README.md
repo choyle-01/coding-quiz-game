@@ -11,4 +11,4 @@ The project site can be found [here](https://choyle-01.github.io/coding-quiz-gam
 The Github repository can be found [here](https://github.com/choyle-01/coding-quiz-game)
 
 ## Visuals
-![photo of finished website](./Coding-Quiz.png)
+![photo of finished website](./assets/Coding-Quiz.png)
