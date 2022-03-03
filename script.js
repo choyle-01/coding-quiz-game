@@ -14,7 +14,7 @@ var submitBtn = document.querySelector("#submit");
 var finalScore = document.querySelector("#score");
 var timer;
 var scoresDisplay = document.querySelector("#high-scores");
-var playAgainBtn = document.querySelector("#play-again")
+var playAgainBtn = document.querySelector("#play-again");
 
 // questions that will be displayed and used in the quiz
 
@@ -120,7 +120,7 @@ gameEl.addEventListener("click", function (event) {
   }
 });
 
-// suposed to get the scores sent to local storage
+// handles local storage and displays the players high scores
 
 function handleInitialSubmit(event) {
   event.preventDefault();
@@ -136,12 +136,11 @@ function handleInitialSubmit(event) {
 }
 
 function showHighScores() {
-  var highScores = localStorage.getItem('highScores');
+  var highScores = localStorage.getItem("highScores");
   scoresDisplay.textContent = highScores;
 }
 submitBtn.addEventListener("click", handleInitialSubmit);
 
 playAgainBtn.addEventListener("click", init);
-
 
 init();
