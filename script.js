@@ -62,7 +62,7 @@ function checkAnswer(possible) {
   var correctAnswer = questions[questionIndex].correct;
   if (possible != correctAnswer) {
     rightOrWrong.textContent = "Incorrect!";
-    seconds -= 12;
+    seconds = Math.max(seconds - 15, 0);
   } else {
     rightOrWrong.textContent = "Correct!";
   }
