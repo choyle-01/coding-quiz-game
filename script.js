@@ -1,4 +1,4 @@
-// all javaScript variables are declared 
+// all javaScript variables are declared
 var startEl = document.querySelector("#startPage");
 var gameEl = document.querySelector("#gamePage");
 var endEl = document.querySelector("#endPage");
@@ -13,6 +13,8 @@ var rightOrWrong = document.querySelector("#correct-incorrect");
 var submitBtn = document.querySelector("#submit");
 var finalScore = document.querySelector("#score");
 var timer;
+var scoresDisplay = document.querySelector("#high-scores");
+var playAgainBtn = document.querySelector("#play-again")
 
 // questions that will be displayed and used in the quiz
 
@@ -34,12 +36,7 @@ var questions = [
   },
 ];
 
-var personScore = {
-  Name: initialsInput,
-  Score: finalScore,
-};
-
-// function and for loop that will display questions and cycle through questions after they have been answered 
+// function and for loop that will display questions and cycle through questions after they have been answered
 
 function renderQuestion() {
   var question = questions[questionIndex];
@@ -65,7 +62,7 @@ function checkAnswer(possible) {
   var correctAnswer = questions[questionIndex].correct;
   if (possible != correctAnswer) {
     rightOrWrong.textContent = "Incorrect!";
-    seconds = Math.max(seconds - 12, 0);
+    seconds -= 12;
   } else {
     rightOrWrong.textContent = "Correct!";
   }
@@ -101,6 +98,8 @@ function endScreen() {
   gameEl.style.display = "none";
   endEl.style.display = "block";
   finalScore.textContent = seconds;
+  timerTime.display = "none";
+  showHighScores();
 }
 
 function init() {
@@ -123,22 +122,26 @@ gameEl.addEventListener("click", function (event) {
 
 // suposed to get the scores sent to local storage
 
-
-
 function handleInitialSubmit(event) {
   event.preventDefault();
 
   var stored = JSON.parse(localStorage.getItem("highScores")) || [];
   var updatedScores = stored.concat({
-    score: score,
+    score: finalScore.textContent,
     initials: initialsInput.value,
   });
 
   localStorage.setItem("highScores", JSON.stringify(updatedScores));
+  showHighScores();
 }
 
-localStorage.setItem("personScore", JSON.stringify(personScore));
+function showHighScores() {
+  var highScores = localStorage.getItem('highScores');
+  scoresDisplay.textContent = highScores;
+}
+submitBtn.addEventListener("click", handleInitialSubmit);
 
-// submitBtn.addEventListener('click', handleInitialSubmit)
+playAgainBtn.addEventListener("click", init);
+
 
 init();
