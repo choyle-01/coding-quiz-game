@@ -1,3 +1,4 @@
+// all javaScript variables are declared 
 var startEl = document.querySelector("#startPage");
 var gameEl = document.querySelector("#gamePage");
 var endEl = document.querySelector("#endPage");
@@ -9,9 +10,12 @@ var seconds = 75;
 var questionIndex = 0;
 var titleEl = document.querySelector("#title");
 var rightOrWrong = document.querySelector("#correct-incorrect");
-var submitButton = document.querySelector("#select");
+var submitBtn = document.querySelector("#submit");
 var finalScore = document.querySelector("#score");
 var timer;
+
+// questions that will be displayed and used in the quiz
+
 var questions = [
   {
     question: "Which of the following is a javaScript data type?",
@@ -35,6 +39,8 @@ var personScore = {
   Score: finalScore,
 };
 
+// function and for loop that will display questions and cycle through questions after they have been answered 
+
 function renderQuestion() {
   var question = questions[questionIndex];
   var currentQuestion = question.question;
@@ -53,6 +59,8 @@ function renderQuestion() {
   }
 }
 
+// function to check if the question is correct or not and display that to the player
+
 function checkAnswer(possible) {
   var correctAnswer = questions[questionIndex].correct;
   if (possible != correctAnswer) {
@@ -63,6 +71,8 @@ function checkAnswer(possible) {
   }
   resultDiv.style.display = "block";
 }
+
+// these functions determine what state the game is in and what fuctions run during each state
 
 function startScreen() {
   startEl.style.display = "block";
@@ -111,6 +121,10 @@ gameEl.addEventListener("click", function (event) {
   }
 });
 
+// suposed to get the scores sent to local storage
+
+
+
 function handleInitialSubmit(event) {
   event.preventDefault();
 
@@ -124,5 +138,7 @@ function handleInitialSubmit(event) {
 }
 
 localStorage.setItem("personScore", JSON.stringify(personScore));
+
+// submitBtn.addEventListener('click', handleInitialSubmit)
 
 init();
